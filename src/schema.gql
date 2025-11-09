@@ -1,0 +1,76 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Extraction {
+  caseNumber: String
+  conclusion: String!
+  court: String
+  createdAt: DateTime!
+  dateOfDecision: String
+  decisionType: String!
+  fileType: FileType
+  id: ID!
+  language: String!
+  office: String
+  originalFileName: String
+  source: String!
+  summary: String!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input ExtractionFilter {
+  caseNumber: String
+  court: String
+  dateFrom: String
+  dateTo: String
+  decisionType: String
+  language: String
+  office: String
+}
+
+type ExtractionPaginationResult {
+  hasMore: Boolean!
+  items: [Extraction!]!
+  limit: Int!
+  offset: Int!
+  total: Int!
+}
+
+input ExtractionSort {
+  field: ExtractionSortField
+  order: SortOrder
+}
+
+enum ExtractionSortField {
+  CASE_NUMBER
+  CREATED_AT
+  DATE_OF_DECISION
+  TITLE
+}
+
+enum FileType {
+  HTML
+  PDF
+}
+
+input PaginationInput {
+  limit: Int = 10
+  offset: Int = 0
+}
+
+type Query {
+  extraction(id: String!): Extraction
+  extractions(filter: ExtractionFilter, pagination: PaginationInput, sort: ExtractionSort): ExtractionPaginationResult!
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
